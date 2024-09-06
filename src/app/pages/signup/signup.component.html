@@ -1,0 +1,174 @@
+<div class="container">
+    <form [formGroup]="signupForm" (ngSubmit)="signup()">
+        <br/><h3 style="text-align: center;">Profile</h3>
+        <div class="form-group">
+            <label>Name</label><label class="text-danger">*</label>
+            <input type="text" id="fullname" class="form-control" formControlName="fullname" placeholder="Name"/>
+            <div class="text-danger" *ngIf="signupForm.get('fullname').errors?.['required'] && signupForm.get('fullname')?.touched">
+                Please enter your name!!
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label><label class="text-danger">*</label>
+            <input type="text" id="username" class="form-control" formControlName="username" placeholder="Username"/>
+            <div class="text-danger" *ngIf="signupForm.get('username').errors?.['required'] && signupForm.get('username')?.touched">
+                Please provide your username!!
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Password</label><label class="text-danger">*</label>
+            <input type="password" id="password" class="form-control" formControlName="password" placeholder="Password" required />
+            <div class="text-danger" *ngIf="signupForm.get('password').errors?.['required'] && signupForm.get('password')?.touched">
+                Please provide your password!!
+            </div>
+            <div class="text-danger" *ngIf="((signupForm.get('password').errors?.['minlength']) || (signupForm.get('password').errors?.['maxlength'])) && signupForm.get('password')?.touched">
+                Password must be between 8 and 24 digits!!
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email</label><label class="text-danger">*</label>
+            <input type="email" id="email" class="form-control" formControlName="email" placeholder="email@example.com"/>
+            <div class="text-danger" *ngIf="(signupForm.get('email').errors?.['required'])  && signupForm.get('email')?.touched">
+                Please enter your email!!
+            </div>
+            <div class="text-danger" *ngIf="((signupForm.get('email').errors?.['email'])) && signupForm.get('email')?.touched">
+                Please enter a valid email address!!
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Phone</label><label class="text-danger">*</label>
+            <input type="tel" id="phone" class="form-control" maxlength="10" formControlName="phone" placeholder="Phone"/>
+            <div class="text-danger" *ngIf="signupForm.get('phone').errors?.['required'] && signupForm.get('phone')?.touched">
+                Please enter your phone number!!
+            </div>
+            <div class="text-danger" *ngIf="((signupForm.get('phone').errors?.['pattern'])) && signupForm.get('phone')?.touched">
+                Please enter a valid 10 digit phone number!!
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Skills:</label>
+            <textarea id="skills" class="form-control" formControlName="skills" rows="6" placeholder="Type your skills"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Desired Salary</label><label class="text-danger">*</label>
+            <input type="number" id="desiredSalary" class="form-control" formControlName="desiredSalary" placeholder="Desired Salary"/>
+            <div class="text-danger" *ngIf="signupForm.get('desiredSalary').errors?.['required'] && signupForm.get('desiredSalary')?.touched">
+                Please input your desired salary!!
+            </div>
+            <div class="text-danger" *ngIf="((signupForm.get('desiredSalary').errors?.['min'])) && signupForm.get('desiredSalary')?.touched">
+                Please input a whole number!!
+            </div>
+        </div>
+        <div class="form-group" formGroupName="address">
+            <br/><h3 style="text-align: center;">Address</h3>
+            <div>
+                <label class="form-label">Street</label><label class="text-danger">*</label>
+                <input type="text" id="street" class="form-control" formControlName="street" placeholder="Street"/>
+                <div class="text-danger" *ngIf="signupForm.get('address.street').errors?.['required'] && signupForm.get('address.street')?.touched">
+                    Please enter your street address!!
+                </div>
+            </div>
+            <div>
+                <label class="form-label">City</label><label class="text-danger">*</label>
+                <input type="text" id="city" class="form-control" formControlName="city" placeholder="City"/>
+                <div class="text-danger" *ngIf="signupForm.get('address.city').errors?.['required'] && signupForm.get('address.city')?.touched">
+                    Please enter your city!!
+                </div>
+            </div>
+            <div>
+                <label>State/Region/Province</label><label class="text-danger">*</label>
+                <input type="text" id="state" class="form-control" formControlName="state" placeholder="State/Region/Province"/>
+                <div class="text-danger" *ngIf="signupForm.get('address.state').errors?.['required'] && signupForm.get('address.state')?.touched">
+                    Please enter your state/region/province!!
+                </div>
+            </div>
+            <div>
+                <label>Zip/Postal Code</label><label class="text-danger">*</label>
+                <input type="number" id="zip_code" class="form-control" formControlName="zip_code" placeholder="Zip/Postal Code"/>
+                <div class="text-danger" *ngIf="signupForm.get('address.zip_code').errors?.['required'] && signupForm.get('address.zip_code')?.touched">
+                    Please enter your Zip/Postal code!!
+                </div>
+            </div>
+            <div>
+                <label>Country</label><label class="text-danger">*</label>
+                <input type="text" id="country" class="form-control" formControlName="country" placeholder="Country"/>
+                <div class="text-danger" *ngIf="signupForm.get('address.country').errors?.['required'] && signupForm.get('address.country')?.touched">
+                    Please enter your country!!
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="form-group" formArrayName="education"> 
+            <br/><h3 style="text-align: center;">Education:</h3>
+                <div *ngFor="let edu of education.controls; let i = index" [formGroupName]="i">
+                <div>
+                    <label>Degree</label><label class="text-danger">*</label>
+                    <select id="degree" formControlName="degree" class="form-select" >
+                        <option selected value disabled>Select one:</option>
+                        <option value="Associate Degree">Associate</option>
+                        <option value="Bachelor's Degree">Bachelor's</option>
+                        <option value="Master's Degree">Master's</option>
+                        <option value="Doctoral Degree">Doctoral</option>
+                    </select>
+                    <div class="text-danger" *ngIf="signupForm.get('edu.degree').errors?.['required'] && signupForm.get('edu.degree')?.touched">
+                        Please select the degree type!!
+                    </div>
+                </div>
+                <div>
+                    <label>Major</label><label class="text-danger">*</label>
+                    <input type="text" id="major" class="form-control" formControlName="major" placeholder="Major" />
+                </div>
+                <div>
+                    <label>Minor</label>
+                    <input type="text" id="minor" class="form-control" formControlName="minor" placeholder="Minor" />
+                </div>
+                <div>
+                    <label>GPA</label>
+                    <input type="number" id="gpa" class="form-control" formControlName="gpa" placeholder="GPA" />
+                </div>
+                <div>
+                    <label>School Name</label><label class="text-danger">*</label>
+                    <input type="text" id="schoolName" class="form-control" formControlName="schoolName" placeholder="School Name" />
+                </div>
+                <button (click)="removeEducation(i)">Remove Education (-)</button>
+            </div>
+            <button type="button" (click)="addEducation()">Add Education (+)</button>
+        </div>
+
+        <div class="form-group" formArrayName="experience"> 
+            <br/><h3 style="text-align: center;">Work Experience:</h3>
+                <div *ngFor="let exp of experience.controls; let i = index" [formGroupName]="i">
+                <div>
+                    <label>Job Title</label><label class="text-danger">*</label>
+                    <input type="text" id="job_title" class="form-control" formControlName="job_title" placeholder="Job Title"/>
+                </div>
+                <div>
+                    <label>Company Name</label><label class="text-danger">*</label>
+                    <input type="text" id="company_name" class="form-control" formControlName="company_name" placeholder="Company Name"/>
+                </div>
+                <div>
+                    <label>Started:</label>
+                    <input type="date" id="started" class="form-control" formControlName="started" placeholder="Started" />
+                </div>
+                <div>
+                    <label>Ended:</label>
+                    <input type="date" id="ended" class="form-control" formControlName="ended" placeholder="Ended" />
+                </div>
+                <div>
+                    <label>Still Working there: </label>
+                    <input type="checkbox" id="still_there" value=True formControlName="still_there" />
+                </div>
+                <div>
+                    <label>Responsibilities:</label>
+                    <textarea id="responsibilities" class="form-control" formControlName="responsibilities" rows="6" placeholder="What responsibilities did you have in this job?"></textarea>
+                </div>
+                <button (click)="removeExperience(i)">Remove Work Experience (-)</button>
+            </div>
+            <button type="button" (click)="addExperience()">Add Work Experience (+)</button>
+        </div>        
+        
+        <button [disabled]="signupForm.invalid" class="btn btn-success mt-3" type="submit">Ok</button>
+
+    </form>
+</div>

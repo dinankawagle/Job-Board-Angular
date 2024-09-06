@@ -1,0 +1,31 @@
+
+<h4>Jobs</h4>
+<table class="table table-bordered table-striped table-hoves">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Posted Date</th>
+            <th>Updated Date</th>
+            <th>Available</th>
+            <th>Action</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let job of jobs">
+            <td>{{job.title}}</td>
+            <td>{{job.posted}}</td>
+            <td>{{job.updated}}</td>
+            <td>{{job.available}}</td>
+            <td>
+                <form [formGroup]="applicationForm" (ngSubmit)="apply(job.id)">
+                    <input type="hidden" formControlName="status" value="Submitted" />
+                    <div formGroupName="applicant"> <input type="hidden" formControlName="id"/>  </div>
+                    <div formGroupName="jobs"><input type="hidden" formControlName="id"/></div>
+                    <button type="submit" class="btn btn-success" *ngIf="job.available=='Yes'">Apply</button>
+                </form>
+            </td>
+            <td><a href="http://localhost:4200/find/job/{{job.id}}" target="_blank"><button class="btn btn-info">Details</button></a></td>
+        </tr>
+    </tbody>
+</table>

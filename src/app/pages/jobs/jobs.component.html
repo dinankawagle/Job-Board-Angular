@@ -1,0 +1,63 @@
+<button routerLink="/jobs/add" style="text-align: center;" class="btn btn-success mb-3 mt-3">Add New Job</button>
+
+<h4>Available Jobs</h4>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Posted Date</th>
+            <th>Updated Date</th>
+            <th>Available</th>
+            <th>Edit</th>
+            <th>Add/Remove</th>
+            <th>See Job</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor="let job of jobs">
+                <td>{{job.title}}</td>
+                <td>{{job.posted}}</td>
+                <td>{{job.updated}}</td>
+                <td>{{job.available}}</td>
+                <td><button class="btn btn-warning" routerLink="/update/job/{{job.id}}">Edit</button> </td>
+                <td *ngIf="job.available=='Yes'">                 
+                    <button class="btn btn-danger m-1" (click)="removeJob(job.id)">Remove</button>
+                </td>
+                <td *ngIf="job.available=='No'">
+                    <button class="btn btn-success" (click)="addJob(job.id)">Add</button>
+                </td>
+                <td>
+                    <a href="http://localhost:4200/find/job/{{job.id}}" target="_blank"><button class="btn btn-info">Details</button></a>
+                </td>
+            </tr>
+    </tbody>
+</table>
+<!--
+<h4>Not Available Jobs</h4>
+<table class="table table-bordered table-striped table-hoves">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Posted Date</th>
+            <th>Updated Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <div *ngFor="let job of jobs">
+            <tr *ngIf="job.available=='No'">
+                <td>{{job.title}}</td>
+                <td>{{job.posted}}</td>
+                <td>{{job.updated}}</td>
+                <td>
+                    <button class="btn btn-warning" routerLink="/update/job/{{job.id}}">Edit</button>
+                    <form [formGroup]="availableForm" (ngSubmit)="removeJob(job.id)">
+                        <input type="hidden" formControlName="available" value="Yes" />
+                        <button class="btn btn-danger" type="submit">Add</button>
+                    </form>
+                </td>
+            </tr>
+        </div>
+    </tbody>
+</table>
+-->

@@ -1,0 +1,133 @@
+<h2 style="text-align: center;">Profiles</h2>
+<button class="btn btn-warning" routerLink="/update/profile/{{this.aid}}">Edit Profile</button>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Skills</th>
+            <th>Desired Salary</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{applicant?.fullname}}</td>
+            <td>{{applicant?.username}}</td>
+            <td>{{applicant?.email}}</td>
+            <td>{{applicant?.phone}}</td>
+            <td>{{applicant?.skills}}</td>
+            <td>{{applicant?.desiredSalary}}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3 style="text-align: center;">Address</h3>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Street</th>
+            <th>City</th>
+            <th>Zip Code</th>
+            <th>State</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{applicant?.address.street}}</td>
+            <td>{{applicant?.address.city}}</td>
+            <td>{{applicant?.address.zip_code}}</td>
+            <td>{{applicant?.address.state}}</td>
+            <td>{{applicant?.address.country}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 style="text-align: center;">Education</h3>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Degree</th>
+            <th>Major</th>
+            <th>Minor</th>
+            <th>GPA</th>
+            <th>School</th>
+            <th>ID</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let app of applicant?.education">
+            <td>{{app.degree}}</td>
+            <td>{{app.major}}</td>
+            <td>{{app.minor}}</td>
+            <td>{{app.gpa}}</td>
+            <td>{{app.schoolName}}</td>
+            <td>{{app.education_id}}</td>
+            <td>
+                <button class="btn btn-warning" routerLink="/update/edu/{{this.aid}}/{{app.education_id}}">Edit/Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 style="text-align: center;">Experience</h3>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Started</th>
+            <th>Responsibilities</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let app of applicant?.experience">
+            <td>{{app.job_title}}</td>
+            <td>{{app.company_name}}</td>
+            <td>{{app.started}}</td>
+            <td>{{app.responsibilities}}</td>
+            <td><button class="btn btn-warning" routerLink="/update/exp/{{this.aid}}/{{app.experience_id}}">Edit/Delete</button> </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="text-align: center;">Applications</h2>
+<button class="btn btn-success" routerLink="/app/new/{{this.aid}}">New Application</button>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Application ID</th>
+            <th>Status</th>
+            <th>Date Submitted</th>
+            <th>Job Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let app of applicant?.applications">
+            <td>{{app.id}}</td>
+            <td>{{app.status}}</td>
+            <td>{{app.submitted}}</td>
+            <td>{{app.jobs.title}}</td>
+            <th *ngIf="app.status!='Withdrawn'">
+                <form [formGroup]="applicationForm" (ngSubmit)="withdrawApplication(app.id)">
+                    <button class="btn btn-danger" type="submit">Withdraw Application</button>
+                </form>
+            </th>
+        </tr>
+    </tbody>
+</table>

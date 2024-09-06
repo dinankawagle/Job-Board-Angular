@@ -1,0 +1,53 @@
+<div class="container">
+    <form [formGroup]="addJobsForm" (ngSubmit)="addJobs()">
+        <div class="form-group">
+            <label>Title:</label>
+            <input type="text" id="title" class="form-control" formControlName="title" placeholder="Title"/>
+        </div>
+        <div class="form-group">
+            <label>Type:</label>
+            <input type="text" id="type" class="form-control" formControlName="type" placeholder="Type"/>
+        </div>
+        <div class="form-group">
+            <label>Level:</label>
+            <input type="text" id="level" class="form-control" formControlName="level" placeholder="Level"/>
+        </div>
+        <div class="form-group">
+            <label>City:</label>
+            <input type="text" id="city" class="form-control" formControlName="city" placeholder="City"/>
+        </div>
+        <div class="form-group">
+            <label>Country:</label>
+            <input type="text" id="country" class="form-control" formControlName="country" placeholder="Country"/>
+        </div>
+        <div class="form-group">
+            <label>Description:</label>
+            <textarea id="description" class="form-control" formControlName="description" rows="6" placeholder="Description of this job"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Responsibilities:</label>
+            <textarea id="responsibility" class="form-control" formControlName="responsibility" rows="6" placeholder="Responsibilities in this job"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Qualification:</label>
+            <textarea id="qualification" class="form-control" formControlName="qualification" rows="6" placeholder="Qualification of this job"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Prefered Qualification:</label>
+            <textarea id="prefered_Qualification" class="form-control" formControlName="prefered_Qualification" rows="6" placeholder="Prefered Qualification for this job"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Min Salary:</label>
+            <input type="number" id="min_salary" class="form-control" formControlName="min_salary" placeholder="Min Salary"/>
+        </div>
+        <div class="form-group">
+            <label>Country:</label>
+            <input type="number" id="max_salary" class="form-control" formControlName="max_salary" placeholder="Max Salary"/>
+        </div>
+        <div class="form-group">
+            <label>Benefits:</label>
+            <textarea id="benefits" class="form-control" formControlName="benefits" rows="6" placeholder="Benefits in this job"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+</div>

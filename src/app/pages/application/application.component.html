@@ -1,0 +1,445 @@
+
+<table *ngFor="let app of apps" class="app-container" class="table table-bordered table-striped table-hover">
+    <thead><br/><br/></thead>
+    <tbody>
+        <tr>
+            <th>Application ID</th>
+            <td>{{app.id}}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{app.status}}</td>
+        </tr>
+        <tr>
+            <th>Submitted</th>
+            <td>{{app.submitted}}</td>
+        </tr>
+    
+    <tr *ngIf="app.status!='Withdrawn'">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>Job</thead>
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{app.jobs.id}}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{app.jobs.title}}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{app.jobs.type}}</td>
+            </tr>
+            <tr>
+                <th>Level</th>
+                <td>{{app.jobs.level}}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{app.jobs.city}}, {{app.jobs.country}}</td>
+            </tr>
+            <tr>
+                <th>Posted</th>
+                <td>{{app.jobs.posted}}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{{app.jobs.updated}}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{app.jobs.description}}</td>
+            </tr>
+            <tr>
+                <th>Responsibility</th>
+                <td>{{app.jobs.responsibility}}</td>
+            </tr>
+            <tr>
+                <th>Qualification</th>
+                <td>{{app.jobs.qualification}}</td>
+            </tr>
+            <tr>
+                <th>Prefered Qualification</th>
+                <td>{{app.jobs.prefered_Qualification}}</td>
+            </tr>
+            <tr>
+                <th>Salary Range</th>
+                <td>${{app.jobs.min_salary}} - ${{app.jobs.max_salary}}</td>
+            </tr>
+            <tr>
+                <th>Benefits</th>
+                <td>{{app.jobs.benefits}}</td>
+            </tr>
+            <tr>
+                <th>Available</th>
+                <td>{{app.jobs.available}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </tr>
+    <tr *ngIf="app.status!='Withdrawn'">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>Applicant</thead>
+            <tbody>
+            <tr>
+                <th>Applicant Id</th>
+                <td>{{app.applicant.id}}</td>
+            </tr>
+            <tr>
+                <th>Applicant Name</th>
+                <th>{{app.applicant.fullname}}</th>
+            </tr>
+            <tr>
+                <th>Applicant Email</th>
+                <td>{{app.applicant.email}}</td>
+            </tr>
+            <tr>
+                <th>Applicant Phone</th>
+                <td>{{app.applicant.phone}}</td>
+            </tr>
+            <tr>
+                <th>Applicant Skills</th>
+                <td>{{app.applicant.skills}}</td>
+            </tr>
+            <tr>
+                <th>Applicant Desired Salary</th>
+                <td>{{app.applicant.desiredSalary}}</td>
+            </tr>
+            <tr>
+                <th>Applicant Address</th>
+                <td>{{app.applicant.address.street}}, {{app.applicant.address.city}}, {{app.applicant.address.state}}, {{app.applicant.address.zip_code}}, {{app.applicant.address.country}}</td>
+            </tr>
+            <tr>
+                <th>Applicant Education</th>
+                <td *ngFor="let edu of app.applicant.education">Degree: {{edu.degree}}, Major: {{edu.major}}, Minor: {{edu.minor}} ,School Name:{{edu.schoolName}}, GPA: {{edu.gpa}}</td>
+            </tr>
+            <tr>
+                <th>Applicant Experience</th>
+            </tr>
+            <tr>
+                <th>Job Title</th>
+                <td *ngFor="let exp of app.applicant.experience">{{exp.job_title}} </td>
+            </tr>
+            <tr>
+                <th>Company Name</th>
+                <td *ngFor="let exp of app.applicant.experience">{{exp.company_name}} </td>
+            </tr>
+            <tr>
+                <th>Job Duration</th>
+                <td *ngFor="let exp of app.applicant.experience">Started: {{exp.started}} <div *ngIf="exp.ended">- Ended: {{exp.ended}} </div></td>
+            </tr>
+            <tr>
+                <th>Still There</th>
+                <td *ngFor="let exp of app.applicant.experience"><div *ngIf="exp.still_there">Yes</div><div *ngIf="!(exp.still_there)">No</div></td>
+            </tr>
+            <tr>
+                <th>Responsibilities</th>
+                <td *ngFor="let exp of app.applicant.experience">{{exp.responsibilities}} </td>
+            </tr>
+            </tbody>
+            
+        </table>
+    </tr>
+    </tbody>
+</table>
+
+
+<!--
+<div *ngFor="let app of apps" class="app-container">
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>Application ID</th>
+            <td>{{app.id}}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{app.status}}</td>
+        </tr>
+        <tr>
+            <th>Submitted</th>
+            <td>{{app.submitted}}</td>
+        </tr>
+    </table>
+    
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>Id</th>
+            <td>{{app.jobs.id}}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{app.jobs.title}}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{app.jobs.type}}</td>
+        </tr>
+        <tr>
+            <th>Level</th>
+            <td>{{app.jobs.level}}</td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td>{{app.jobs.city}}, {{app.jobs.country}}</td>
+        </tr>
+        <tr>
+            <th>Posted</th>
+            <td>{{app.jobs.posted}}</td>
+        </tr>
+        <tr>
+            <th>Updated</th>
+            <td>{{app.jobs.updated}}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{app.jobs.description}}</td>
+        </tr>
+        <tr>
+            <th>Responsibility</th>
+            <td>{{app.jobs.responsibility}}</td>
+        </tr>
+        <tr>
+            <th>Qualification</th>
+            <td>{{app.jobs.qualification}}</td>
+        </tr>
+        <tr>
+            <th>Preferred Qualification</th>
+            <td>{{app.jobs.prefered_Qualification}}</td>
+        </tr>
+        <tr>
+            <th>Salary Range</th>
+            <td>${{app.jobs.min_salary}} - ${{app.jobs.max_salary}}</td>
+        </tr>
+        <tr>
+            <th>Benefits</th>
+            <td>{{app.jobs.benefits}}</td>
+        </tr>
+        <tr>
+            <th>Available</th>
+            <td>{{app.jobs.available}}</td>
+        </tr>
+    </table>
+    
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>Applicant Id</th>
+            <td>{{app.applicant.id}}</td>
+        </tr>
+        <tr>
+            <th>Applicant Name</th>
+            <td>{{app.applicant.fullname}}</td>
+        </tr>
+        <tr>
+            <th>Applicant Email</th>
+            <td>{{app.applicant.email}}</td>
+        </tr>
+        <tr>
+            <th>Applicant Phone</th>
+            <td>{{app.applicant.phone}}</td>
+        </tr>
+        <tr>
+            <th>Applicant Skills</th>
+            <td>{{app.applicant.skills}}</td>
+        </tr>
+        <tr>
+            <th>Applicant Desired Salary</th>
+            <td>{{app.applicant.desiredSalary}}</td>
+        </tr>
+        <tr>
+            <th>Applicant Address</th>
+            <td>{{app.applicant.address.street}}, {{app.applicant.address.city}}, {{app.applicant.address.state}}, {{app.applicant.address.zip_code}}, {{app.applicant.address.country}}</td>
+        </tr>
+        <tr>
+            <th>Applicant Education</th>
+            <td>
+                <div *ngFor="let edu of app.applicant.education">
+                    Degree: {{edu.degree}}, Major: {{edu.major}}, Minor: {{edu.minor}}, School Name: {{edu.schoolName}}, GPA: {{edu.gpa}}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Applicant Experience</th>
+            <td>
+                <div *ngFor="let exp of app.applicant.experience">
+                    <div>Job Title: {{exp.job_title}}</div>
+                    <div>Company Name: {{exp.company_name}}</div>
+                    <div>Job Duration: Started: {{exp.started}} - Ended: {{exp.ended}}</div>
+                    <div>Still There: {{exp.still_there ? 'Yes' : 'No'}}</div>
+                    <div>Responsibilities: {{exp.responsibilities}}</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div> -->
+
+<!--
+<div *ngFor="let app of apps" class="app-container">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th colspan="2">Application Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Application ID</th>
+                <td>{{app.id}}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{app.status}}</td>
+            </tr>
+            <tr>
+                <th>Submitted</th>
+                <td>{{app.submitted}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Job Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{app.jobs.id}}</td>
+                            </tr>
+                            <tr>
+                                <th>Title</th>
+                                <td>{{app.jobs.title}}</td>
+                            </tr>
+                            <tr>
+                                <th>Type</th>
+                                <td>{{app.jobs.type}}</td>
+                            </tr>
+                            <tr>
+                                <th>Level</th>
+                                <td>{{app.jobs.level}}</td>
+                            </tr>
+                            <tr>
+                                <th>Location</th>
+                                <td>{{app.jobs.city}}, {{app.jobs.country}}</td>
+                            </tr>
+                            <tr>
+                                <th>Posted</th>
+                                <td>{{app.jobs.posted}}</td>
+                            </tr>
+                            <tr>
+                                <th>Updated</th>
+                                <td>{{app.jobs.updated}}</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td>{{app.jobs.description}}</td>
+                            </tr>
+                            <tr>
+                                <th>Responsibility</th>
+                                <td>{{app.jobs.responsibility}}</td>
+                            </tr>
+                            <tr>
+                                <th>Qualification</th>
+                                <td>{{app.jobs.qualification}}</td>
+                            </tr>
+                            <tr>
+                                <th>Preferred Qualification</th>
+                                <td>{{app.jobs.prefered_Qualification}}</td>
+                            </tr>
+                            <tr>
+                                <th>Salary Range</th>
+                                <td>${{app.jobs.min_salary}} - ${{app.jobs.max_salary}}</td>
+                            </tr>
+                            <tr>
+                                <th>Benefits</th>
+                                <td>{{app.jobs.benefits}}</td>
+                            </tr>
+                            <tr>
+                                <th>Available</th>
+                                <td>{{app.jobs.available}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Applicant Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Applicant Id</th>
+                                <td>{{app.applicant.id}}</td>
+                            </tr>
+                            <tr>
+                                <th>Applicant Name</th>
+                                <td>{{app.applicant.fullname}}</td>
+                            </tr>
+                            <tr>
+                                <th>Applicant Email</th>
+                                <td>{{app.applicant.email}}</td>
+                            </tr>
+                            <tr>
+                                <th>Applicant Phone</th>
+                                <td>{{app.applicant.phone}}</td>
+                            </tr>
+                            <tr>
+                                <th>Applicant Skills</th>
+                                <td>{{app.applicant.skills}}</td>
+                            </tr>
+                            <tr>
+                                <th>Applicant Desired Salary</th>
+                                <td>{{app.applicant.desiredSalary}}</td>
+                            </tr>
+                            <tr>
+                                <th>Applicant Address</th>
+                                <td>
+                                    {{app.applicant.address.street}}, 
+                                    {{app.applicant.address.city}}, 
+                                    {{app.applicant.address.state}}, 
+                                    {{app.applicant.address.zip_code}}, 
+                                    {{app.applicant.address.country}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Applicant Education</th>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let edu of app.applicant.education">
+                                            Degree: {{edu.degree}}, 
+                                            Major: {{edu.major}}, 
+                                            Minor: {{edu.minor}}, 
+                                            School Name: {{edu.schoolName}}, 
+                                            GPA: {{edu.gpa}}
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Applicant Experience</th>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let exp of app.applicant.experience">
+                                            Job Title: {{exp.job_title}}, 
+                                            Company Name: {{exp.company_name}}, 
+                                            Duration: Started {{exp.started}} - Ended {{exp.ended}}, 
+                                            Still There: {{exp.still_there ? 'Yes' : 'No'}}, 
+                                            Responsibilities: {{exp.responsibilities}}
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+-->
+

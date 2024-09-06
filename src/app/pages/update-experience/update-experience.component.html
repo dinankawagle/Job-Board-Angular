@@ -1,0 +1,28 @@
+<div class="container">
+    <form [formGroup]="signupForm" (ngSubmit)="submit()">
+        <br/><h3 style="text-align: center;">Education:</h3>
+                <div>
+                    <label>Degree:</label>
+                    <input type="text" id="degree" class="form-control" formControlName="degree" placeholder="Degree"/>
+                </div>
+                <div>
+                    <label>Major:</label>
+                    <input type="text" id="major" class="form-control" formControlName="major" placeholder="Major" />
+                </div>
+                <div>
+                    <label>Minor:</label>
+                    <input type="text" id="minor" class="form-control" formControlName="minor" placeholder="Minor" />
+                </div>
+                <div>
+                    <label>GPA:</label>
+                    <input type="number" id="gpa" class="form-control" formControlName="gpa" placeholder="GPA" />
+                </div>
+                <div>
+                    <label>School Name:</label>
+                    <input type="text" id="schoolName" class="form-control" formControlName="schoolName" placeholder="School Name" />
+                </div>
+                <button type="submit" class="btn btn-success m-1">Update</button>
+                <button type="reset" class="btn btn-warning m-1">Clear</button><br/><br/>
+                <button type="button" class="btn btn-danger" (click)="delete()">Delete This Education</button>
+    </form>
+</div>

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Experience } from '../../models/experience';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-update-experience',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule,RouterLink],
+  imports: [ReactiveFormsModule,FormsModule,RouterLink,CommonModule],
   templateUrl: './update-experience.component.html',
   styleUrl: './update-experience.component.scss'
 })
@@ -19,8 +20,8 @@ export class UpdateExperienceComponent implements OnInit{
 
   ngOnInit(): void {
       this.signupForm=this.formBuilder.group({
-        job_title:[''],
-        company_name:[''],
+        job_title:['',Validators.required],
+        company_name:['',Validators.required],
         started:[''],
         ended:[''],
         still_there:[''],

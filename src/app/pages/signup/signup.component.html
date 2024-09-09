@@ -8,11 +8,14 @@
                 Please enter your name!!
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="!this.id">
             <label for="username">Username</label><label class="text-danger">*</label>
             <input type="text" id="username" class="form-control" formControlName="username" placeholder="Username"/>
             <div class="text-danger" *ngIf="signupForm.get('username').errors?.['required'] && signupForm.get('username')?.touched">
                 Please provide your username!!
+            </div>
+            <div class="text-danger" *ngIf="(this.users.includes(signupForm.get('username').value))&& signupForm.get('username')?.touched">
+                This username has already been taken. PLease pick another one!!
             </div>
         </div>
         <div class="form-group">
@@ -111,13 +114,16 @@
                         <option value="Master's Degree">Master's</option>
                         <option value="Doctoral Degree">Doctoral</option>
                     </select>
-                    <div class="text-danger" *ngIf="signupForm.get('edu.degree').errors?.['required'] && signupForm.get('edu.degree')?.touched">
+                    <div class="text-danger" *ngIf="edu.get('degree').errors?.['required'] && edu.get('degree')?.touched">
                         Please select the degree type!!
                     </div>
                 </div>
                 <div>
                     <label>Major</label><label class="text-danger">*</label>
                     <input type="text" id="major" class="form-control" formControlName="major" placeholder="Major" />
+                    <div class="text-danger" *ngIf="edu.get('major').errors?.['required'] && edu.get('major')?.touched">
+                        Please enter your major!!
+                    </div>
                 </div>
                 <div>
                     <label>Minor</label>
@@ -130,6 +136,9 @@
                 <div>
                     <label>School Name</label><label class="text-danger">*</label>
                     <input type="text" id="schoolName" class="form-control" formControlName="schoolName" placeholder="School Name" />
+                    <div class="text-danger" *ngIf="edu.get('schoolName').errors?.['required'] && edu.get('schoolName')?.touched">
+                        Please enter your school's name!!
+                    </div>
                 </div>
                 <button (click)="removeEducation(i)">Remove Education (-)</button>
             </div>
@@ -142,10 +151,16 @@
                 <div>
                     <label>Job Title</label><label class="text-danger">*</label>
                     <input type="text" id="job_title" class="form-control" formControlName="job_title" placeholder="Job Title"/>
+                    <div class="text-danger" *ngIf="exp.get('job_title').errors?.['required'] && exp.get('job_title')?.touched">
+                        Please enter your major!!
+                    </div>
                 </div>
                 <div>
                     <label>Company Name</label><label class="text-danger">*</label>
                     <input type="text" id="company_name" class="form-control" formControlName="company_name" placeholder="Company Name"/>
+                    <div class="text-danger" *ngIf="exp.get('company_name').errors?.['required'] && exp.get('company_name')?.touched">
+                        Please enter your major!!
+                    </div>
                 </div>
                 <div>
                     <label>Started:</label>

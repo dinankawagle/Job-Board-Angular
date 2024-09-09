@@ -58,7 +58,7 @@ export class UserService {
     return this.http.delete<string>(this.api.concat("/delete/exp/"+id),{responseType:'text' as 'json'});
   }
 
-  allApplicants():Observable<User[]>{
-    return this.http.get<User[]>(this.api.concat(),this.httpOptions);
+  allApplicants():Observable<string[]>{
+    return this.http.get<string[]>(this.api.concat("/username"),this.httpOptions);
   }
 }

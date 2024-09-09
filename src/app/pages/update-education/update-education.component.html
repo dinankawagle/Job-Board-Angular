@@ -2,12 +2,24 @@
     <form [formGroup]="signupForm" (ngSubmit)="submit()">
         <br/><h3 style="text-align: center;">Education:</h3>
                 <div>
-                    <label>Degree:</label>
-                    <input type="text" id="degree" class="form-control" formControlName="degree" placeholder="Degree"/>
+                    <label>Degree</label><label class="text-danger">*</label>
+                    <select id="degree" formControlName="degree" class="form-select" >
+                        <option selected value disabled>Select one:</option>
+                        <option value="Associate Degree">Associate</option>
+                        <option value="Bachelor's Degree">Bachelor's</option>
+                        <option value="Master's Degree">Master's</option>
+                        <option value="Doctoral Degree">Doctoral</option>
+                    </select>                    
+                    <div class="text-danger" *ngIf="signupForm.get('degree').errors?.['required'] && signupForm.get('degree')?.touched">
+                        Please enter your degree!!
+                    </div>
                 </div>
                 <div>
                     <label>Major:</label>
                     <input type="text" id="major" class="form-control" formControlName="major" placeholder="Major" />
+                    <div class="text-danger" *ngIf="signupForm.get('major').errors?.['required'] && signupForm.get('major')?.touched">
+                        Please enter your major!!
+                    </div>
                 </div>
                 <div>
                     <label>Minor:</label>
@@ -20,8 +32,11 @@
                 <div>
                     <label>School Name:</label>
                     <input type="text" id="schoolName" class="form-control" formControlName="schoolName" placeholder="School Name" />
+                    <div class="text-danger" *ngIf="signupForm.get('schoolName').errors?.['required'] && signupForm.get('schoolName')?.touched">
+                        Please enter your school name!!
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-success m-1">Update</button>
+                <button [disabled]="signupForm.invalid" type="submit" class="btn btn-success m-1">Update</button>
                 <button type="reset" class="btn btn-warning m-1">Clear</button><br/><br/>
                 <button type="button" class="btn btn-danger" (click)="delete()">Delete This Education</button>
     </form>

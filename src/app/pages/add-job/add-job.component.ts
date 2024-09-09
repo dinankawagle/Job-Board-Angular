@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { JobsService } from '../../services/jobs.service';
 import { Jobs } from '../../models/jobs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-job',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, RouterLink],
+  imports: [ReactiveFormsModule, FormsModule, RouterLink,CommonModule],
   templateUrl: './add-job.component.html',
   styleUrl: './add-job.component.scss'
 })
@@ -19,17 +20,17 @@ export class AddJobComponent implements OnInit{
 
   ngOnInit(): void {
       this.addJobsForm=this.formBuilder.group({
-        title:[''],
-        type:[''],
-        level:[''],
-        city:[''],
-        country:[''],
-        description:[''],
-        responsibility:[''],
-        qualification:[''],
+        title:['', Validators.required],
+        type:['', Validators.required],
+        level:['', Validators.required],
+        city:['', Validators.required],
+        country:['', Validators.required],
+        description:['', Validators.required],
+        responsibility:['', Validators.required],
+        qualification:['', Validators.required],
         prefered_Qualification:[''],
-        min_salary:[''],
-        max_salary:[''],
+        min_salary:['',[Validators.required,Validators.min(0)]],
+        max_salary:['',[Validators.required,Validators.min(0)]],
         benefits:['']
       })
 

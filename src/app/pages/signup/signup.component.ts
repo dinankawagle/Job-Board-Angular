@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit{
   
   signupForm:FormGroup;
   id:number;
-  users:User[]=[];
+  users:string[]=[];
   constructor(private userService: UserService, private formBuilder:FormBuilder, private route:Router, private activeRoute:ActivatedRoute){}
   
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit{
   }
 
   getEveryUser():void{
-    this.userService.allApplicants().subscribe((users:User[])=>{
+    this.userService.allApplicants().subscribe((users:string[])=>{
       this.users=users;
     })
   }
@@ -62,11 +62,11 @@ export class SignupComponent implements OnInit{
 
   addEducation():void{
     const educationGroup = this.formBuilder.group({
-      degree:[''],
-      major:[''],
+      degree:['',Validators.required],
+      major:['',Validators.required],
       minor:[''],
       gpa:[''],
-      schoolName:['']
+      schoolName:['',Validators.required]
     });
     this.education.push(educationGroup);
   }
@@ -81,8 +81,8 @@ export class SignupComponent implements OnInit{
 
   addExperience():void{
     const experienceGroup = this.formBuilder.group({
-      job_title:[''],
-      company_name:[''],
+      job_title:['',Validators.required],
+      company_name:['',Validators.required],
       started:[''],
       ended:[''],
       still_there:[''],

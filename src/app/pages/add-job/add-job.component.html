@@ -3,34 +3,69 @@
         <div class="form-group">
             <label>Title:</label>
             <input type="text" id="title" class="form-control" formControlName="title" placeholder="Title"/>
+            <div class="text-danger" *ngIf="addJobsForm.get('title').errors?.['required'] && addJobsForm.get('title')?.touched">
+                Please enter the title of this job!!
+            </div>
         </div>
         <div class="form-group">
             <label>Type:</label>
-            <input type="text" id="type" class="form-control" formControlName="type" placeholder="Type"/>
+            <select id="type" formControlName="type" class="form-select">
+                <option selected value disabled>Pick one:</option>
+                <option value="In-person">In-person</option>
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+            </select>
+            <div class="text-danger" *ngIf="addJobsForm.get('type').errors?.['required'] && addJobsForm.get('type')?.touched">
+                Please enter the job type!!
+            </div>
         </div>
         <div class="form-group">
             <label>Level:</label>
-            <input type="text" id="level" class="form-control" formControlName="level" placeholder="Level"/>
+            <select id="level" formControlName="level" class="form-select">
+                <option selected value disabled>Pick one:</option>
+                <option value="Entry-level">Entry-level</option>
+                <option value="Mid-level">Mid-level </option>
+                <option value="Senior-level">Senior-level</option>
+                <option value="Internship">Internship</option>
+            </select>
+            <div class="text-danger" *ngIf="addJobsForm.get('level').errors?.['required'] && addJobsForm.get('level')?.touched">
+                Please enter the job level!!
+            </div>
         </div>
         <div class="form-group">
             <label>City:</label>
             <input type="text" id="city" class="form-control" formControlName="city" placeholder="City"/>
+            <div class="text-danger" *ngIf="addJobsForm.get('city').errors?.['required'] && addJobsForm.get('city')?.touched">
+                Please enter the city name!!
+            </div>
         </div>
         <div class="form-group">
             <label>Country:</label>
             <input type="text" id="country" class="form-control" formControlName="country" placeholder="Country"/>
+            <div class="text-danger" *ngIf="addJobsForm.get('country').errors?.['required'] && addJobsForm.get('country')?.touched">
+                Please enter the country!!
+            </div>
         </div>
         <div class="form-group">
             <label>Description:</label>
             <textarea id="description" class="form-control" formControlName="description" rows="6" placeholder="Description of this job"></textarea>
+            <div class="text-danger" *ngIf="addJobsForm.get('description').errors?.['required'] && addJobsForm.get('description')?.touched">
+                Please give a description of this job!!
+            </div>
         </div>
         <div class="form-group">
             <label>Responsibilities:</label>
             <textarea id="responsibility" class="form-control" formControlName="responsibility" rows="6" placeholder="Responsibilities in this job"></textarea>
+            <div class="text-danger" *ngIf="addJobsForm.get('responsibility').errors?.['required'] && addJobsForm.get('responsibility')?.touched">
+                Please enter the responsibilities in this job!!
+            </div>
         </div>
         <div class="form-group">
             <label>Qualification:</label>
             <textarea id="qualification" class="form-control" formControlName="qualification" rows="6" placeholder="Qualification of this job"></textarea>
+            <div class="text-danger" *ngIf="addJobsForm.get('qualification').errors?.['required'] && addJobsForm.get('qualification')?.touched">
+                Please enter the qualificationr needed for this job!!
+            </div>
         </div>
         <div class="form-group">
             <label>Prefered Qualification:</label>
@@ -39,15 +74,21 @@
         <div class="form-group">
             <label>Min Salary:</label>
             <input type="number" id="min_salary" class="form-control" formControlName="min_salary" placeholder="Min Salary"/>
+            <div class="text-danger" *ngIf="(addJobsForm.get('min_salary').errors?.['required'] || addJobsForm.get('min_salary').errors?.['min']  )&& addJobsForm.get('min_salary')?.touched">
+                Please enter a whole number!!
+            </div>
         </div>
         <div class="form-group">
-            <label>Country:</label>
+            <label>Max Salary:</label>
             <input type="number" id="max_salary" class="form-control" formControlName="max_salary" placeholder="Max Salary"/>
+            <div class="text-danger" *ngIf="(addJobsForm.get('max_salary').errors?.['required'] || addJobsForm.get('max_salary').errors?.['min'] )&& addJobsForm.get('max_salary')?.touched">
+                Please enter a whole number!!
+            </div>
         </div>
         <div class="form-group">
             <label>Benefits:</label>
             <textarea id="benefits" class="form-control" formControlName="benefits" rows="6" placeholder="Benefits in this job"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button [disabled]="addJobsForm.invalid" type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
 </div>

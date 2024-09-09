@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { Education } from '../../models/education';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-update-education',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule,RouterLink],
+  imports: [ReactiveFormsModule,FormsModule,RouterLink,CommonModule],
   templateUrl: './update-education.component.html',
   styleUrl: './update-education.component.scss'
 })
@@ -20,11 +21,11 @@ export class UpdateEducationComponent implements OnInit {
   
   ngOnInit(): void {
       this.signupForm=this.formBuilder.group({
-        degree:[''],
-        major:[''],
+        degree:['', Validators.required],
+        major:['',Validators.required],
         minor:[''],
         gpa:[''],
-        schoolName:['']
+        schoolName:['',Validators.required]
       })
 
       this.aid=parseInt(this.activeRoute.snapshot.paramMap.get("aid"))

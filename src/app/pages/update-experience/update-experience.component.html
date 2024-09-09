@@ -2,27 +2,37 @@
     <form [formGroup]="signupForm" (ngSubmit)="submit()">
         <br/><h3 style="text-align: center;">Education:</h3>
                 <div>
-                    <label>Degree:</label>
-                    <input type="text" id="degree" class="form-control" formControlName="degree" placeholder="Degree"/>
+                    <label>Job Title:</label>
+                    <input type="text" id="job_title" class="form-control" formControlName="job_title" placeholder="Job Title"/>
+                    <div class="text-danger" *ngIf="signupForm.get('job_title').errors?.['required'] && signupForm.get('job_title')?.touched">
+                        Please enter your job title!!
+                    </div>
                 </div>
                 <div>
-                    <label>Major:</label>
-                    <input type="text" id="major" class="form-control" formControlName="major" placeholder="Major" />
+                    <label>Company Name:</label>
+                    <input type="text" id="company_name" class="form-control" formControlName="company_name" placeholder="Company Name" />
+                    <div class="text-danger" *ngIf="signupForm.get('company_name').errors?.['required'] && signupForm.get('company_name')?.touched">
+                        Please enter your company name!
+                    </div>
                 </div>
                 <div>
-                    <label>Minor:</label>
-                    <input type="text" id="minor" class="form-control" formControlName="minor" placeholder="Minor" />
+                    <label>Started:</label>
+                    <input type="date" id="started" class="form-control" formControlName="started" placeholder="Started" />
                 </div>
                 <div>
-                    <label>GPA:</label>
-                    <input type="number" id="gpa" class="form-control" formControlName="gpa" placeholder="GPA" />
+                    <label>Ended:</label>
+                    <input type="date" id="ended" class="form-control" formControlName="ended" placeholder="Ended" />
                 </div>
                 <div>
-                    <label>School Name:</label>
-                    <input type="text" id="schoolName" class="form-control" formControlName="schoolName" placeholder="School Name" />
+                    <label>Still there</label>
+                    <input type="checkbox" id="still_there" value=True formControlName="still_there" />
+                </div>
+                <div>
+                    <label>Responsibilities</label>
+                    <textarea id="responsibilities" class="form-control" formControlName="responsibilities" rows="6" placeholder="What responsibilities did you have in this job?"></textarea>
                 </div>
                 <button type="submit" class="btn btn-success m-1">Update</button>
                 <button type="reset" class="btn btn-warning m-1">Clear</button><br/><br/>
-                <button type="button" class="btn btn-danger" (click)="delete()">Delete This Education</button>
+                <button type="button" class="btn btn-danger" (click)="delete()">Delete This Experience</button>
     </form>
 </div>

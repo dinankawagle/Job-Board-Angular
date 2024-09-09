@@ -5,11 +5,13 @@ import { ApplicationService } from '../../services/application.service';
 import { JobsService } from '../../services/jobs.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Jobs } from '../../models/jobs';
+import { TableModule } from 'primeng/table';
+
 
 @Component({
   selector: 'app-new-app',
   standalone: true,
-  imports: [CommonModule,RouterLink, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule,RouterLink, ReactiveFormsModule, FormsModule,TableModule],
   templateUrl: './new-app.component.html',
   styleUrl: './new-app.component.scss'
 })

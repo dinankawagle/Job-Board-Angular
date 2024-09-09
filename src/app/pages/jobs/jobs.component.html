@@ -1,6 +1,103 @@
-<button routerLink="/jobs/add" style="text-align: center;" class="btn btn-success mb-3 mt-3">Add New Job</button>
+<button routerLink="/jobs/add" style="text-align: center;" class="btn btn-success mb-3 mt-3"><i class="pi pi-plus-circle"> Add New Job</i></button>
 
-<h4>Available Jobs</h4>
+<h4 style="text-align: center;">Available Jobs</h4>
+<div class="card">
+<p-table [value]="jobs" styleClass="p-datatable-striped" [rows]="3" [paginator]="true" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="title" >Title <p-sortIcon field="title" /></th>
+            <th pSortableColumn="posted" >Posted <p-sortIcon field="posted" /></th>
+            <th pSortableColumn="updated">Updated <p-sortIcon field="updated" /></th>
+            <th>Available</th>
+            <th>Edit</th>
+            <th>Add/Remove</th>
+            <th>See Job</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-job>
+        <tr *ngIf="job.available=='Yes'">
+            <td>{{job.title}}</td>
+            <td>{{job.posted}}</td>
+            <td>{{job.updated}}</td>
+            <td>{{job.available}}</td>
+            <td><button class="btn btn-warning" routerLink="/update/job/{{job.id}}"><i class="pi pi-pen-to-square"> Edit</i> </button> </td>
+            <td *ngIf="job.available=='Yes'">                 
+                <button class="btn btn-danger m-1" (click)="removeJob(job.id)"><i class="pi pi-trash"> Remove</i></button>
+            </td>
+            <td>
+                <a href="http://localhost:4200/find/job/{{job.id}}" target="_blank"><button class="btn btn-info"><i class="pi pi-info-circle"> Details</i></button></a>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+
+
+<br/>
+<h4 style="text-align: center;">Not Available Jobs</h4>
+<div class="card">
+<p-table [value]="jobs" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="title" >Title <p-sortIcon field="title" /></th>
+            <th pSortableColumn="posted" >Posted <p-sortIcon field="posted" /></th>
+            <th pSortableColumn="updated">Updated <p-sortIcon field="updated" /></th>
+            <th>Available</th>
+            <th>Edit</th>
+            <th>Add/Remove</th>
+            <th>See Job</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-job>
+        <tr *ngIf="job.available=='No'">
+            <td>{{job.title}}</td>
+            <td>{{job.posted}}</td>
+            <td>{{job.updated}}</td>
+            <td>{{job.available}}</td>
+            <td><button class="btn btn-warning" routerLink="/update/job/{{job.id}}"><i class="pi pi-pen-to-square"> Edit</i> </button> </td>
+            <td *ngIf="job.available=='No'">
+                <button class="btn btn-success" (click)="addJob(job.id)"><i class="pi pi-plus-circle"> Add</i> </button>
+            </td>
+            <td>
+                <a href="http://localhost:4200/find/job/{{job.id}}" target="_blank"><button class="btn btn-info"><i class="pi pi-info-circle"> Details</i></button></a>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+
+
+
+<!-- <table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Posted Date</th>
+            <th>Updated Date</th>
+            <th>Available</th>
+            <th>Edit</th>
+            <th>Add/Remove</th>
+            <th>See Job</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let job of jobs">
+            <tr *ngIf="job.available=='Yes'">
+                <td>{{job.title}}</td>
+                <td>{{job.posted}}</td>
+                <td>{{job.updated}}</td>
+                <td>{{job.available}}</td>
+                <td><button class="btn btn-warning" routerLink="/update/job/{{job.id}}">Edit</button> </td>
+                <td *ngIf="job.available=='Yes'">                 
+                    <button class="btn btn-danger m-1" (click)="removeJob(job.id)">Remove</button>
+                </td>
+                <td>
+                    <a href="http://localhost:4200/find/job/{{job.id}}" target="_blank"><button class="btn btn-info">Details</button></a>
+                </td>
+            </tr>
+    </tbody>
+</table> -->
+
+<!-- <h4 style="text-align: center;">Not Available Jobs</h4>
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
@@ -13,16 +110,13 @@
             <th>See Job</th>
         </tr>
     </thead>
-    <tbody>
-            <tr *ngFor="let job of jobs">
+    <tbody *ngFor="let job of jobs">
+            <tr *ngIf="job.available=='No'">
                 <td>{{job.title}}</td>
                 <td>{{job.posted}}</td>
                 <td>{{job.updated}}</td>
                 <td>{{job.available}}</td>
                 <td><button class="btn btn-warning" routerLink="/update/job/{{job.id}}">Edit</button> </td>
-                <td *ngIf="job.available=='Yes'">                 
-                    <button class="btn btn-danger m-1" (click)="removeJob(job.id)">Remove</button>
-                </td>
                 <td *ngIf="job.available=='No'">
                     <button class="btn btn-success" (click)="addJob(job.id)">Add</button>
                 </td>
@@ -31,33 +125,4 @@
                 </td>
             </tr>
     </tbody>
-</table>
-<!--
-<h4>Not Available Jobs</h4>
-<table class="table table-bordered table-striped table-hoves">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Posted Date</th>
-            <th>Updated Date</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <div *ngFor="let job of jobs">
-            <tr *ngIf="job.available=='No'">
-                <td>{{job.title}}</td>
-                <td>{{job.posted}}</td>
-                <td>{{job.updated}}</td>
-                <td>
-                    <button class="btn btn-warning" routerLink="/update/job/{{job.id}}">Edit</button>
-                    <form [formGroup]="availableForm" (ngSubmit)="removeJob(job.id)">
-                        <input type="hidden" formControlName="available" value="Yes" />
-                        <button class="btn btn-danger" type="submit">Add</button>
-                    </form>
-                </td>
-            </tr>
-        </div>
-    </tbody>
-</table>
--->
+</table> -->

@@ -4,6 +4,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user';
+// import { PasswordModule } from 'primeng/password';
+// import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +17,7 @@ import { User } from '../../models/user';
 export class SignupComponent implements OnInit{
   
   signupForm:FormGroup;
+  value!: string;
   id:number;
   users:string[]=[];
   constructor(private userService: UserService, private formBuilder:FormBuilder, private route:Router, private activeRoute:ActivatedRoute){}

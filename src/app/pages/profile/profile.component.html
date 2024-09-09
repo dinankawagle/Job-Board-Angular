@@ -1,5 +1,5 @@
 <h2 style="text-align: center;">Profiles</h2>
-<button class="btn btn-warning" routerLink="/update/profile/{{this.aid}}">Edit Profile</button>
+<button class="btn btn-warning" routerLink="/update/profile/{{this.aid}}"><i class="pi pi-user-edit"> Edit Profile</i></button>
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
@@ -104,7 +104,33 @@
 </table>
 
 <h2 style="text-align: center;">Applications</h2>
-<button class="btn btn-success" routerLink="/app/new/{{this.aid}}">New Application</button>
+<button class="btn btn-success" routerLink="/app/new/{{this.aid}}"><i class="pi pi-plus-circle"> New Application</i></button>
+
+
+<!-- <p-table [value]="applicant?.applications" [tableStyle]="{ 'min-width': '50rem' }"      styleClass="p-datatable-gridlines" >
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Application ID</th>
+            <th>Status</th>
+            <th>Date Submitted</th>
+            <th>Job Title</th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-app>
+        <tr>
+            <td>{{app.id}}</td>
+            <td>{{app.status}}</td>
+            <td>{{app.submitted}}</td>
+            <td>{{app.jobs.title}}</td>
+            <td *ngIf="app.status!='Withdrawn'">
+                <form [formGroup]="applicationForm" (ngSubmit)="withdrawApplication(app.id)">
+                    <button class="btn btn-danger" type="submit">Withdraw Application</button>
+                </form>
+            </td>
+        </tr>
+    </ng-template>
+</p-table> -->
 
 <table class="table table-bordered table-striped table-hover">
     <thead>
@@ -117,17 +143,38 @@
         </tr>
     </thead>
 
-    <tbody>
-        <tr *ngFor="let app of applicant?.applications">
+    <tbody *ngFor="let app of applicant?.applications">
+        <tr *ngIf="app.status!='Withdrawn'">
             <td>{{app.id}}</td>
             <td>{{app.status}}</td>
             <td>{{app.submitted}}</td>
             <td>{{app.jobs.title}}</td>
-            <th *ngIf="app.status!='Withdrawn'">
+            <td *ngIf="app.status!='Withdrawn'">
                 <form [formGroup]="applicationForm" (ngSubmit)="withdrawApplication(app.id)">
                     <button class="btn btn-danger" type="submit">Withdraw Application</button>
                 </form>
-            </th>
+            </td>
         </tr>
     </tbody>
-</table>
+</table> 
+
+<h2 style="text-align: center;">Withdrawn Applications</h2>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Application ID</th>
+            <th>Status</th>
+            <th>Date Withdraw</th>
+            <th>Job Title</th>
+        </tr>
+    </thead>
+
+    <tbody *ngFor="let app of applicant?.applications">
+        <tr *ngIf="app.status=='Withdrawn'">
+            <td>{{app.id}}</td>
+            <td>{{app.status}}</td>
+            <td>{{app.submitted}}</td>
+            <td>{{app.jobs.title}}</td>
+        </tr>
+    </tbody>
+</table> 

@@ -1,5 +1,43 @@
+<h4 style="text-align: center;">Available Jobs</h4>
+<div class="card">
+<p-table [value]="jobs" styleClass="p-datatable-striped" [paginator]="true" [rows]="3" [tableStyle]="{ 'min-width': '50rem' }" sortMode="multiple">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="title" >Title <p-sortIcon field="title" /></th>
+            <th pSortableColumn="level">Level <p-sortIcon field="level" /></th>
+            <th pSortableColumn="type">Type <p-sortIcon field="type" /></th>
+            <th pSortableColumn="updated">Updated <p-sortIcon field="updated" /></th>
+            <th>Available</th>
+            <th>Action</th>
+            <th>Details</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-job>
+        <tr *ngIf="job.available=='Yes'">
+            <td>{{job.title}}</td>
+            <td>{{job.level}}</td>
+            <td>{{job.type}}</td>
+            <td>{{job.updated}}</td>
+            <td>{{job.available}}</td>
+            <td>
+                <form [formGroup]="applicationForm" (ngSubmit)="apply(job.id)">
+                    <input type="hidden" formControlName="status" value="Submitted" />
+                    <div formGroupName="applicant"> <input type="hidden" formControlName="id"/>  </div>
+                    <div formGroupName="jobs"><input type="hidden" formControlName="id"/></div>
+                    <button type="submit" class="btn btn-success" *ngIf="job.available=='Yes'">Apply</button>
+                </form>
+            </td>
+            <td>
+                <a href="http://localhost:4200/find/job/{{job.id}}" target="_blank"><button class="btn btn-info"><i class="pi pi-info-circle"> Details</i></button></a>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
 
-<h4>Jobs</h4>
+
+<!-- 
+<h4 style="text-align: center;">Jobs</h4>
 <table class="table table-bordered table-striped table-hoves">
     <thead>
         <tr>
@@ -11,8 +49,8 @@
             <th>Details</th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let job of jobs">
+    <tbody *ngFor="let job of jobs">
+        <tr *ngIf="job.available=='Yes'">
             <td>{{job.title}}</td>
             <td>{{job.posted}}</td>
             <td>{{job.updated}}</td>
@@ -28,4 +66,4 @@
             <td><a href="http://localhost:4200/find/job/{{job.id}}" target="_blank"><button class="btn btn-info">Details</button></a></td>
         </tr>
     </tbody>
-</table>
+</table> -->

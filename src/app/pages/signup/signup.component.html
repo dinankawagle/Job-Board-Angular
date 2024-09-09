@@ -21,6 +21,21 @@
         <div class="form-group">
             <label>Password</label><label class="text-danger">*</label>
             <input type="password" id="password" class="form-control" formControlName="password" placeholder="Password" required />
+            <!-- <p-password [(ngModel)]="value" formControlName="password">
+                <ng-template pTemplate="header">
+                    <h6>Pick a password</h6>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <p-divider />
+                    <p class="mt-2">Suggestions</p>
+                    <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                        <li>At least one lowercase</li>
+                        <li>At least one uppercase</li>
+                        <li>At least one numeric</li>
+                        <li>Minimum 8 characters</li>
+                    </ul>
+                </ng-template>
+            </p-password> -->
             <div class="text-danger" *ngIf="signupForm.get('password').errors?.['required'] && signupForm.get('password')?.touched">
                 Please provide your password!!
             </div>
@@ -140,9 +155,9 @@
                         Please enter your school's name!!
                     </div>
                 </div>
-                <button (click)="removeEducation(i)">Remove Education (-)</button>
+                <button class="btn btn-danger" (click)="removeEducation(i)">Remove Education (-)</button>
             </div>
-            <button type="button" (click)="addEducation()">Add Education (+)</button>
+            <button type="button" class="btn btn-success" (click)="addEducation()">Add Education (+)</button>
         </div>
 
         <div class="form-group" formArrayName="experience"> 
@@ -178,12 +193,12 @@
                     <label>Responsibilities:</label>
                     <textarea id="responsibilities" class="form-control" formControlName="responsibilities" rows="6" placeholder="What responsibilities did you have in this job?"></textarea>
                 </div>
-                <button (click)="removeExperience(i)">Remove Work Experience (-)</button>
+                <button class="btn btn-danger" (click)="removeExperience(i)">Remove Work Experience (-)</button>
             </div>
-            <button type="button" (click)="addExperience()">Add Work Experience (+)</button>
+            <button type="button" class="btn btn-success" (click)="addExperience()">Add Work Experience (+)</button>
         </div>        
         
-        <button [disabled]="signupForm.invalid" class="btn btn-success mt-3" type="submit">Ok</button>
+        <button [disabled]="signupForm.invalid" class="btn btn-primary mt-3" type="submit">Save</button>
 
     </form>
 </div>

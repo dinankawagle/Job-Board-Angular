@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ApplicationService } from '../../services/application.service';
 import { Application } from '../../models/application';
 
+
 @Component({
   selector: 'app-profile',
   standalone: true,
